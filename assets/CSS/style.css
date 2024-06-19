@@ -1,0 +1,252 @@
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0px;
+    padding:0px;
+    color: white;
+
+}
+
+:root{
+
+    --corfundo:background-color: rgb(90, 98, 212);
+    --corcinza:#959595:
+
+}
+
+
+body{
+
+    background-color:#1A1A1A;
+
+}
+
+
+
+::-webkit-scrollbar-track {
+    background-color: #424242;
+}
+::-webkit-scrollbar {
+    width: 0.7rem;
+    background: #F4F4F4;
+}
+::-webkit-scrollbar-thumb {
+    background:#676767;
+}
+
+header{
+
+    display: flex;
+
+    justify-content: space-around;
+    align-items:baseline;
+    margin-bottom: 50px;
+    padding:1rem;
+  
+    background-color: rgb(36, 36, 36);
+    color: whitesmoke;
+
+    box-shadow: 1px 1px 7px rgba(17, 22, 18, 0.205);
+
+    flex-wrap: nowrap;
+    
+}
+
+h1{
+
+    font-size: 1.7rem;
+
+}
+
+h2{
+
+    font-size:8vw;
+    text-align: center;
+    background: -webkit-linear-gradient(#41D291,#51AEC2,#4783be);
+    background-clip: border-box;
+    -webkit-background-clip : text;
+    -webkit-text-fill-color : transparent;
+    
+
+}
+
+h3{
+
+    font-size: 1.2rem;
+    text-align: center;
+    color:#959595;
+
+}
+#botão{
+
+    margin:25px;
+    
+}
+
+#botão a{
+
+    text-align: center;
+    color: #213547;
+    font-weight: bold;
+
+
+    padding:10px;
+    margin: auto;
+    background-color:#42B883;
+    border-radius: 8px;
+    
+
+        
+    width: 80px;
+    height: 25px;
+    margin-top: 25px;
+        
+    
+    
+}
+
+#botão a:hover{
+
+
+    background-color:#3ba374;
+    
+}
+
+
+
+main{
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+main > article > section{
+
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+section{    
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    align-items: center;
+    padding: 5px;
+    align-content: baseline;
+
+}
+
+article{
+
+    display: flex;
+    gap:25px;
+    
+
+
+}
+
+.ph{
+
+    color: rgb(255, 255, 255);
+
+}
+
+
+
+.horintalinfo{
+
+    margin: 50px;
+
+}
+
+.horizontal{
+    
+    max-width: 10px;
+
+
+}
+.titleh {
+
+    font-weight:350;
+    color: white;
+    
+
+}
+
+.paragrafoh{
+    max-width: 350px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 24px;
+    color:#959595;
+ 
+
+}
+
+
+ul#menu li {
+    font-size: 1.1rem;
+    padding: 1.7rem;
+    display:inline;
+}
+
+a{
+
+    text-decoration: none;
+    color: white;
+    transition: .3s;
+
+}
+
+a:hover{
+
+    color: #51AEC2;
+    transform: scale(1.1);
+
+}
+
+#git{
+
+    font-weight: bold;
+    color: #78cf99;
+    padding: 5px;
+    box-shadow: 1px 1px 8px rgba(144, 232, 238, 0.651);
+
+}
+
+#git:hover{
+
+    color: #54946c;
+    
+
+}
+
+.titles{
+
+
+    padding:5px;
+    font-weight: bold;
+
+}
+
+
+footer{
+
+
+    line-height: 29px;
+    text-align: center;
+    padding:1.5rem;
+    background-color:#2c2c2c;
+    color:var(--corcinza);
+    
+    
+
+}
+
+
+
+

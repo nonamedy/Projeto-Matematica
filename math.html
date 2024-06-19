@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Gerador</title>
+
+    <link rel="stylesheet"  href="assets/CSS/math.css">
+    <link rel="stylesheet" media="all" href="assets/CSS/MediaQuerys/mathquery.css">
+    
+</head>
+<body>
+    
+    <header>
+
+        <h1 class="titles"><a href="index.html">Meu projeto JS</a></h1>
+
+        <nav>
+
+            <ul id="menu">
+
+                <li><a href="#">Outros Projetos</a></li>
+                <li><a href="#">Fale comigo</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <main id="main">
+
+        <div class="cabecalho">
+
+            <h2 class="cabecalho-itens"> Selecione sua tabuada</h2>
+
+        </div>
+
+        <!--Div dedicada para uma mensagem de erro [Caso uma das tabelas não sejam selecionadas]-->
+        <div id="error"></div>
+
+        <!--Contêm As Tabelas de escolha  -->
+        <div id="tabs">
+
+            <div class="selectab"  id="tab_estatica">
+
+                <h3>Tabuada Estática</h3>
+
+                <p> Gere uma tabuada com os mesmos valores</p>
+
+            </div>
+
+            <div class="selectab" id="tab_aleatoria">
+
+                <h3>Tabuada aleatôria</h3>
+                
+                <p>Gere uma tabuada com valores aletórios</p>
+    
+            </div>
+
+
+
+
+        </div>
+        <!--Div dedicada para o Cronometro  -->
+        <div class="cronometro">
+
+            <div class="time"></div>
+            
+        </div>
+
+        <div class="container-botoes">
+            
+            
+            <button  class="btn" id="botão">Iniciar</button>
+            <button class="btn" id="operação">Adição</button>
+        
+        </div>
+        
+
+        <!--- Aqui serão inserifos as contas -->
+        <section id="contas-container">
+            
+        </section>
+
+    </main>
+
+    <script type="module" src="assets/scripts/script.js"></script>
+
+</body>
+</html>
