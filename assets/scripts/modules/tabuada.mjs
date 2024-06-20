@@ -192,7 +192,7 @@ function recebe_resposta(lst){
 // Exibe no HTML quantas contas foram comcluidas/ total de contas Ex:[14/24]
 function contas_concluidas(contas){
 
-    cabecalho.innerHTML = '<h2 id="h2"> Comclua todas as contas !</h2>';
+    cabecalho.innerHTML = '<h2 id="h2"> Conclua todas as contas !</h2>';
     botoes.innerHTML = `<p id="finished">${contador}/${contas.length}</p>`;
 
 }
