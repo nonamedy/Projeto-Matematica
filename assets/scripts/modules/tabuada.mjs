@@ -1,6 +1,6 @@
 
 import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds } from "./cronometro.mjs";
-
+import { operador } from "./operação.mjs";
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
 
@@ -20,7 +20,7 @@ export const button = document.querySelector('#botão');
 const cronometroE1 = document.querySelector('.time');
 
 //  array com com os valroes da tabuada estática
-export const tabuada_estatica = [[9,9],[6,5],[7,9],[2,8],[8,9],[4,3],[9,6],[7,4],[8,7],[5,6],[9,5],[7,6],[8,3],[9,3],[7,2],[4,9],[3,4],[7,5],[5,4],[2,9],[3,2],[5,5],[8,6],[3,7],[2,4],[6,8],[4,5],[8,5],[3,4],[9,7],[4,3],[7,8],[6,6],[9,8],[7,7],[3,9],[6,7],[5,4],[6,9],[3,3],[5,8],[5,9],[2,3],[8,2],[9,4],[4,7],[8,8],[4,2],[9,2],[8,4],[5,7],[2,7],[4,8],[7,3]]
+
 
 // variavel acomuladora
 let contador = 0;
@@ -44,8 +44,8 @@ export function gerar_tabuada(){
         let n1 = Math.floor((Math.random() * 9) + 1);
         let n2 = Math.floor((Math.random() * 9) + 1);
 
-        // Adiciona os números gerados em uma lista.
-        const vlr = [n1,n2];
+        // Adiciona os números gerados em uma lista [realocando sua posição].
+        const vlr = formata_para_naturais([n1,n2]);
 
         // Adiciona os números gerados em uma lista externa.
         valores.push(vlr);
@@ -53,7 +53,47 @@ export function gerar_tabuada(){
     }
     
     // retorna uma array com todas as contas geradas.
+
     return valores;
+
+}
+
+// Realoca a posição dos  números para que seus resultados sejam sempre naturais[N]
+function formata_para_naturais(vlr){
+
+    if (operador === '-' | operador === '%'){
+
+        let menor = vlr[0]
+        let maior = vlr[0]
+        console.log('------------')
+        console.log('Original')
+        console.log(vlr)
+        console.log('------------')
+
+        if(vlr[1] > maior){
+
+            maior = vlr[1]
+    
+
+        }
+
+        if(vlr[1] < menor){
+
+   
+            menor = vlr[1]
+        }
+
+
+        vlr[0] = maior
+        vlr[1] = menor
+        console.log('------------')
+        console.log('Modificado')
+        console.log(vlr)
+        console.log('------------')
+
+        return vlr
+
+    }
 
 }
 
@@ -70,10 +110,8 @@ function printa_tabuada(lst){
 
     //  Cria  um input/label para a conta.
     div.innerHTML = '';
-    div.innerHTML +=`<label for="resposta" class="contaa"> ${lst[contador][0]}+${lst[contador][1]} = </label>`;
+    div.innerHTML +=`<label for="resposta" class="contaa"> ${lst[contador][0]}${operador}${lst[contador][1]} = </label>`;
     div.innerHTML +=`<input value="" class="HOHOHO"  min="0" max="99" required placeholder="0" type="number" name="resp" id="resposta">`;
-
-
 
 }
 
@@ -120,6 +158,7 @@ function recebe_resposta(lst){
 
     //Elemento HTML do input
     const input =  document.querySelector('#resposta');
+    
 
     // Verifica a tecla pressionada no elemento.
     input.addEventListener('keyup',function (tecla){
@@ -146,7 +185,7 @@ function recebe_resposta(lst){
 
                 containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col">u/result</th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
-                contas_erradas.forEach((conta) => { dados.innerHTML += `<tr><td>${conta[0]} + ${conta[1]}</td> <td>${conta[2]}</td> <td>${conta[0] + conta[1]}</td></tr>`})
+                contas_erradas.forEach((conta) => { dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${conta[0] + conta[1]}</td></tr>`})
                 
             }
 
@@ -179,7 +218,7 @@ function recebe_resposta(lst){
             contas_concluidas(lst);
 
             // Atribui ao label a 'nova' conta.
-            label.textContent = `${lst[contador][0]}+${lst[contador][1]} = `;
+            label.textContent = `${lst[contador][0]}${operador}${lst[contador][1]} = `;
             input.value = ''
 
         }

@@ -1,4 +1,6 @@
-import { app,button,gerar_tabuada,tabuada_estatica} from "./tabuada.mjs";
+import { app,button,gerar_tabuada} from "./tabuada.mjs";
+import { tabuada_estatica } from "./operação.mjs";
+
 
 //Tabuada Estática
 export const static_tab = document.querySelector('#tab_estatica') 
