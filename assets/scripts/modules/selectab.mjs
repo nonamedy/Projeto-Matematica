@@ -59,7 +59,6 @@ export function resposta_correta(n1,n2){
 
     switch(valor){
 
-
         case 'Adição':
             return resultado = n1 + n2
        

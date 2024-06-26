@@ -46,7 +46,13 @@ export function gerar_tabuada(){
         let n2 = Math.floor((Math.random() * 9) + 1);
 
         // Adiciona os números gerados em uma lista [realocando sua posição].
-        const vlr = formata_para_naturais([n1,n2]);
+        let vlr = [n1,n2];
+
+        if (operador === 'Subtração' | operador === 'Divisão'){
+
+            vlr = formata_para_naturais([n1,n2]);
+
+        }
 
         // Adiciona os números gerados em uma lista externa.
         valores.push(vlr);
@@ -160,7 +166,6 @@ function recebe_resposta(lst){
     //Elemento HTML do input
     const input =  document.querySelector('#resposta');
     
-
     // Verifica a tecla pressionada no elemento.
     input.addEventListener('keyup',function (tecla){
 
@@ -263,12 +268,8 @@ function dasboard(){
 
 function steps(tabuada){
 
-    //Gera a tabuada
-
     // Começa o cronometro
     starttimer()
-
-    tabb(tabuada)
 
     //Printa a tabuada no HTML
     printa_tabuada(tabuada);
@@ -281,11 +282,6 @@ function steps(tabuada){
 
 }
 
-export function tabb(tab){
-
-    return tab
-
-}
 
 // -----------------------------------------------------------------------------
 
