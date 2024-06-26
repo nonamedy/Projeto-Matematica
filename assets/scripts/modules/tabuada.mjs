@@ -1,6 +1,6 @@
 
 import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds } from "./cronometro.mjs";
-import { operador} from "./operação.mjs";
+import { operador,quantity} from "./operação.mjs";
 import { resposta_correta } from "./selectab.mjs";
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
@@ -39,7 +39,7 @@ export function gerar_tabuada(){
     const valores = [];
 
     // laço de repetição. Intuito é repetir x vezes para criar x contas.
-    for (let c = 1; c<=54;c++){
+    for (let c = 1; c<=quantity;c++){
 
         // Gera números aléatorios de 1 até 9.
         let n1 = Math.floor((Math.random() * 9) + 1);
