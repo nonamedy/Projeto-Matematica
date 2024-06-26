@@ -1,6 +1,7 @@
 
 import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds } from "./cronometro.mjs";
-import { operador } from "./operação.mjs";
+import { operador} from "./operação.mjs";
+import { resposta_correta } from "./selectab.mjs";
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
 
@@ -23,7 +24,7 @@ const cronometroE1 = document.querySelector('.time');
 
 
 // variavel acomuladora
-let contador = 0;
+export let contador = 0;
 
 let acerto = 0;
 let erro = 0;
@@ -185,8 +186,8 @@ function recebe_resposta(lst){
 
                 containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col">u/result</th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
-                contas_erradas.forEach((conta) => { dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${conta[0] + conta[1]}</td></tr>`})
-                
+                contas_erradas.forEach((conta) => {dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${resposta_correta(conta[0],conta[1])}</td></tr>`})
+               
             }
 
             // Elemento [Label] do HTML
@@ -196,7 +197,7 @@ function recebe_resposta(lst){
             const user_resposta = Number(input.value);
 
             // Resposta correta da conta
-            const resp = lst[contador][0] + lst[contador][1];
+            const resp = resposta_correta(lst[contador][0],lst[contador][1])
 
             // Verifica se o usuario errou a resposta.
             if ( user_resposta == resp){
@@ -207,7 +208,7 @@ function recebe_resposta(lst){
 
                 erro += 1;
                 contas_erradas.push([lst[contador][0],lst[contador][1],user_resposta])
-                console.log(contas_erradas)
+                
 
             }
 
@@ -267,6 +268,8 @@ function steps(tabuada){
     // Começa o cronometro
     starttimer()
 
+    tabb(tabuada)
+
     //Printa a tabuada no HTML
     printa_tabuada(tabuada);
 
@@ -275,6 +278,12 @@ function steps(tabuada){
 
     // Recebe o resultado e faz os devidos processos
     recebe_resposta(tabuada);
+
+}
+
+export function tabb(tab){
+
+    return tab
 
 }
 
