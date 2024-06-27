@@ -413,6 +413,13 @@ th{
 
 }
 
+#operação{
+
+    min-width: 110px;
+    min-height: 25px;
+
+}
+
 #operação:hover{
 
     cursor:pointer;
