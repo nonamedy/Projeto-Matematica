@@ -48,9 +48,15 @@ export function gerar_tabuada(){
         // Adiciona os números gerados em uma lista [realocando sua posição].
         let vlr = [n1,n2];
 
-        if (operador === 'Subtração' | operador === 'Divisão'){
+        if (operador === '-' | operador === '%'){
 
             vlr = formata_para_naturais([n1,n2]);
+
+            if (operador === '%' & vlr[1] % vlr[2] != 0){
+
+                vlr = formata_para_div_inteiro(vlr)
+
+            }
 
         }
 
@@ -65,6 +71,22 @@ export function gerar_tabuada(){
 
 }
 
+// Formata os números para uma divisão inteira
+function formata_para_div_inteiro(numbers){
+
+    while(numbers[0] % numbers[1] !== 0 | numbers[0] / numbers[1] > 9 | numbers[1] === 1){
+
+        // Gera números aléatorios de 1 até 9.
+        numbers[0] = Math.floor((Math.random() * 90) + 10);
+        numbers[1] = Math.floor((Math.random() * 9) + 1);
+
+        formata_para_naturais(numbers)
+
+    }
+
+    return numbers
+}
+
 // Realoca a posição dos  números para que seus resultados sejam sempre naturais[N]
 function formata_para_naturais(vlr){
 
@@ -72,10 +94,6 @@ function formata_para_naturais(vlr){
 
         let menor = vlr[0]
         let maior = vlr[0]
-        console.log('------------')
-        console.log('Original')
-        console.log(vlr)
-        console.log('------------')
 
         if(vlr[1] > maior){
 
@@ -93,10 +111,6 @@ function formata_para_naturais(vlr){
 
         vlr[0] = maior
         vlr[1] = menor
-        console.log('------------')
-        console.log('Modificado')
-        console.log(vlr)
-        console.log('------------')
 
         return vlr
 

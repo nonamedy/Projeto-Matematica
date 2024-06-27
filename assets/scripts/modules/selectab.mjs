@@ -14,7 +14,7 @@ const tab_container =  document.querySelector('#error')
 
 
 //resultado correto
-let resultado =0;
+let resultado = 0;
 
 // tabuada selecionada [array]
 let selected_tab = []
