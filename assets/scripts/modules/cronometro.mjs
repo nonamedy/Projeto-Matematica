@@ -90,6 +90,8 @@ export function select(){
     let fim = formata_tempo(minutes,seconds,milleseconds)
 
     const [minutos, segundos, millesegundos] = fim.split(':');
+
+    // Converte  tudo em segundos
     let MinutosEmSegundos =  parseInt(minutos * 60)
     let SegundosEmSegundos = parseInt(segundos)
     let MillesegundosEmSegundos = parseFloat(millesegundos) / 1000
