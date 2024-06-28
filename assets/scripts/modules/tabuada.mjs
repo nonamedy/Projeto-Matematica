@@ -1,5 +1,5 @@
 
-import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds } from "./cronometro.mjs";
+import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds ,select,calcula_diferença} from "./cronometro.mjs";
 import { operador,quantity} from "./operação.mjs";
 import { resposta_correta } from "./selectab.mjs";
 // container que as contas serão printadas
@@ -19,9 +19,11 @@ export const button = document.querySelector('#botão');
 
 // Cronometro
 const cronometroE1 = document.querySelector('.time');
-
+let soma = 0
 //  array com com os valroes da tabuada estática
-
+let inicio = 0
+let fim = 0
+let media = 0
 
 // variavel acomuladora
 export let contador = 0;
@@ -174,6 +176,7 @@ export function app(tab){
     }
 }
 
+
 // Recebe o valor do input  e faz o devido tratamento de dados;
 function recebe_resposta(lst){
 
@@ -186,15 +189,15 @@ function recebe_resposta(lst){
         // Verifica se a tecla Enter foi pressionada.
         if (tecla.key === 'Enter'){
 
+            fim = select()
+            
             // Com todas as contas finalizadas.
             if(contador === lst.length){
 
                 //Para o cronometro
                 stopTimer()
 
-                // Recebe o tempo [00:00:000] 
-                const temp = formata_tempo(minutes,seconds,milleseconds)
-
+                media =  Math.ceil(soma / lst.length)
                 //tira o contador do HTML
                 botoes.innerHTML =''
 
@@ -228,7 +231,6 @@ function recebe_resposta(lst){
                 erro += 1;
                 contas_erradas.push([lst[contador][0],lst[contador][1],user_resposta])
                 
-
             }
 
             // Esta função atribui +1 na váriavel contador.
@@ -241,10 +243,12 @@ function recebe_resposta(lst){
             label.textContent = `${lst[contador][0]}${operador}${lst[contador][1]} = `;
             input.value = ''
 
-        }
-        
-    })
+            soma += calcula_diferença(inicio,fim)
+            inicio = fim
 
+        }
+
+    })
 
 }
 
@@ -253,6 +257,8 @@ function contas_concluidas(contas){
 
     cabecalho.innerHTML = '<h2 id="h2"> Conclua todas as contas !</h2>';
     botoes.innerHTML = `<p id="finished">${contador}/${contas.length}</p>`;
+  
+   
 
 }
 
@@ -263,17 +269,15 @@ function fcont(){
 
 }
 
-
 function dasboard(){
-
 
     // Exibe 'dasboard' na tela
     const h2 = document.querySelector('#h2');
     h2.textContent = 'Dashboard';
 
     // Exibe a sseções na tela [ERROS / ACERTOS / ??]
-  
-    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4>Média p/ Calc</h4><p>${0}</p></div></div>`)
+    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4>Média p/ Calc</h4><p>${`${media}Seg`}</p></div></div>`)
+
 
 }
 
@@ -284,13 +288,12 @@ function steps(tabuada){
 
     // Começa o cronometro
     starttimer()
-
+    inicio = select()
     //Printa a tabuada no HTML
     printa_tabuada(tabuada);
 
     // Contabiliza as contas já comcluidas
     contas_concluidas(tabuada);
-
     // Recebe o resultado e faz os devidos processos
     recebe_resposta(tabuada);
 

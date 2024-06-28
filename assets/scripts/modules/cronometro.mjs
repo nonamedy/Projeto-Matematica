@@ -84,7 +84,24 @@ export function formata_tempo(min,seg,mill){
     return `${min}:${seg}:${mill}`
 
 }
+// Converte o timer em segundos
+export function select(){
 
+    let fim = formata_tempo(minutes,seconds,milleseconds)
+
+    const [minutos, segundos, millesegundos] = fim.split(':');
+    let MinutosEmSegundos =  parseInt(minutos * 60)
+    let SegundosEmSegundos = parseInt(segundos)
+    let MillesegundosEmSegundos = parseFloat(millesegundos) / 1000
+    return MinutosEmSegundos + SegundosEmSegundos + MillesegundosEmSegundos
+
+}
+
+export function calcula_diferença(start,end){
+
+    return  end - start
+
+}
 // Para o Cronometro.
 export function stopTimer(){
 

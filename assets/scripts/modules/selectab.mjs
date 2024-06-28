@@ -54,9 +54,6 @@ export function resposta_correta(n1,n2){
 
     let valor = buttonE1.textContent
 
-    console.log(n1,n2)
-    console.log(valor)
-
     switch(valor){
 
         case 'Adição':
