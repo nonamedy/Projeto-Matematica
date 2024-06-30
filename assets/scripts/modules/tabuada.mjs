@@ -2,6 +2,7 @@
 import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds ,select,calcula_diferença} from "./cronometro.mjs";
 import { operador,quantity} from "./operação.mjs";
 import { resposta_correta } from "./selectab.mjs";
+import { dicas } from "./hints.mjs";
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
 
@@ -196,6 +197,7 @@ function recebe_resposta(lst){
 
                 //Para o cronometro
                 stopTimer()
+                dicas(formata_tempo(minutes,seconds,milleseconds))
 
                 media =  Math.ceil(soma / lst.length)
                 //tira o contador do HTML
