@@ -78,6 +78,7 @@ export const tabuadas = {
 
 }
 
+// Valores padrão [Adição]
 export let quantity = tabuadas.adição.quantidade
 export let tabuada_estatica = tabuadas.adição.tab_add
 
