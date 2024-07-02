@@ -1,6 +1,8 @@
 
-import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds } from "./cronometro.mjs";
-
+import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds ,select,calcula_diferença} from "./cronometro.mjs";
+import { operador,quantity} from "./operação.mjs";
+import { resposta_correta } from "./selectab.mjs";
+import { dicas } from "./hints.mjs";
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
 
@@ -18,12 +20,14 @@ export const button = document.querySelector('#botão');
 
 // Cronometro
 const cronometroE1 = document.querySelector('.time');
-
+let soma = 0
 //  array com com os valroes da tabuada estática
-export const tabuada_estatica = [[9,9],[6,5],[7,9],[2,8],[8,9],[4,3],[9,6],[7,4],[8,7],[5,6],[9,5],[7,6],[8,3],[9,3],[7,2],[4,9],[3,4],[7,5],[5,4],[2,9],[3,2],[5,5],[8,6],[3,7],[2,4],[6,8],[4,5],[8,5],[3,4],[9,7],[4,3],[7,8],[6,6],[9,8],[7,7],[3,9],[6,7],[5,4],[6,9],[3,3],[5,8],[5,9],[2,3],[8,2],[9,4],[4,7],[8,8],[4,2],[9,2],[8,4],[5,7],[2,7],[4,8],[7,3]]
+let inicio = 0
+let fim = 0
+let media = 0
 
 // variavel acomuladora
-let contador = 0;
+export let contador = 0;
 
 let acerto = 0;
 let erro = 0;
@@ -38,14 +42,26 @@ export function gerar_tabuada(){
     const valores = [];
 
     // laço de repetição. Intuito é repetir x vezes para criar x contas.
-    for (let c = 1; c<=54;c++){
+    for (let c = 1; c<=quantity;c++){
 
         // Gera números aléatorios de 1 até 9.
         let n1 = Math.floor((Math.random() * 9) + 1);
         let n2 = Math.floor((Math.random() * 9) + 1);
 
-        // Adiciona os números gerados em uma lista.
-        const vlr = [n1,n2];
+        // Adiciona os números gerados em uma lista [realocando sua posição].
+        let vlr = [n1,n2];
+
+        if (operador === '-' | operador === '%'){
+
+            vlr = formata_para_naturais([n1,n2]);
+
+            if (operador === '%' & vlr[1] % vlr[2] != 0){
+
+                vlr = formata_para_div_inteiro(vlr)
+
+            }
+
+        }
 
         // Adiciona os números gerados em uma lista externa.
         valores.push(vlr);
@@ -53,7 +69,55 @@ export function gerar_tabuada(){
     }
     
     // retorna uma array com todas as contas geradas.
+
     return valores;
+
+}
+
+// Formata os números para uma divisão inteira
+function formata_para_div_inteiro(numbers){
+
+    while(numbers[0] % numbers[1] !== 0 | numbers[0] / numbers[1] > 9 | numbers[1] === 1){
+
+        // Gera números aléatorios de 1 até 9.
+        numbers[0] = Math.floor((Math.random() * 90) + 10);
+        numbers[1] = Math.floor((Math.random() * 9) + 1);
+
+        formata_para_naturais(numbers)
+
+    }
+
+    return numbers
+}
+
+// Realoca a posição dos  números para que seus resultados sejam sempre naturais[N]
+function formata_para_naturais(vlr){
+
+    if (operador === '-' | operador === '%'){
+
+        let menor = vlr[0]
+        let maior = vlr[0]
+
+        if(vlr[1] > maior){
+
+            maior = vlr[1]
+    
+
+        }
+
+        if(vlr[1] < menor){
+
+   
+            menor = vlr[1]
+        }
+
+
+        vlr[0] = maior
+        vlr[1] = menor
+
+        return vlr
+
+    }
 
 }
 
@@ -70,10 +134,8 @@ function printa_tabuada(lst){
 
     //  Cria  um input/label para a conta.
     div.innerHTML = '';
-    div.innerHTML +=`<label for="resposta" class="contaa"> ${lst[contador][0]}+${lst[contador][1]} = </label>`;
+    div.innerHTML +=`<label for="resposta" class="contaa"> ${lst[contador][0]}${operador}${lst[contador][1]} = </label>`;
     div.innerHTML +=`<input value="" class="HOHOHO"  min="0" max="99" required placeholder="0" type="number" name="resp" id="resposta">`;
-
-
 
 }
 
@@ -115,27 +177,29 @@ export function app(tab){
     }
 }
 
+
 // Recebe o valor do input  e faz o devido tratamento de dados;
 function recebe_resposta(lst){
 
     //Elemento HTML do input
     const input =  document.querySelector('#resposta');
-
+    
     // Verifica a tecla pressionada no elemento.
     input.addEventListener('keyup',function (tecla){
 
         // Verifica se a tecla Enter foi pressionada.
         if (tecla.key === 'Enter'){
 
+            fim = select()
+            
             // Com todas as contas finalizadas.
             if(contador === lst.length){
 
                 //Para o cronometro
                 stopTimer()
+                dicas(formata_tempo(minutes,seconds,milleseconds))
 
-                // Recebe o tempo [00:00:000] 
-                const temp = formata_tempo(minutes,seconds,milleseconds)
-
+                media =  Math.ceil(soma / lst.length)
                 //tira o contador do HTML
                 botoes.innerHTML =''
 
@@ -144,10 +208,10 @@ function recebe_resposta(lst){
 
                 // Exibe no HTML aglumas informções.
 
-                containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col">u/result</th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
+                containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col"><abbr title="Resposta do Usuário">u/result</abbr></th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
-                contas_erradas.forEach((conta) => { dados.innerHTML += `<tr><td>${conta[0]} + ${conta[1]}</td> <td>${conta[2]}</td> <td>${conta[0] + conta[1]}</td></tr>`})
-                
+                contas_erradas.forEach((conta) => {dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${resposta_correta(conta[0],conta[1])}</td></tr>`})
+               
             }
 
             // Elemento [Label] do HTML
@@ -157,7 +221,7 @@ function recebe_resposta(lst){
             const user_resposta = Number(input.value);
 
             // Resposta correta da conta
-            const resp = lst[contador][0] + lst[contador][1];
+            const resp = resposta_correta(lst[contador][0],lst[contador][1])
 
             // Verifica se o usuario errou a resposta.
             if ( user_resposta == resp){
@@ -168,8 +232,7 @@ function recebe_resposta(lst){
 
                 erro += 1;
                 contas_erradas.push([lst[contador][0],lst[contador][1],user_resposta])
-                console.log(contas_erradas)
-
+                
             }
 
             // Esta função atribui +1 na váriavel contador.
@@ -179,13 +242,15 @@ function recebe_resposta(lst){
             contas_concluidas(lst);
 
             // Atribui ao label a 'nova' conta.
-            label.textContent = `${lst[contador][0]}+${lst[contador][1]} = `;
+            label.textContent = `${lst[contador][0]}${operador}${lst[contador][1]} = `;
             input.value = ''
 
-        }
-        
-    })
+            soma += calcula_diferença(inicio,fim)
+            inicio = fim
 
+        }
+
+    })
 
 }
 
@@ -194,6 +259,8 @@ function contas_concluidas(contas){
 
     cabecalho.innerHTML = '<h2 id="h2"> Conclua todas as contas !</h2>';
     botoes.innerHTML = `<p id="finished">${contador}/${contas.length}</p>`;
+  
+   
 
 }
 
@@ -204,34 +271,28 @@ function fcont(){
 
 }
 
-
 function dasboard(){
-
 
     // Exibe 'dasboard' na tela
     const h2 = document.querySelector('#h2');
     h2.textContent = 'Dashboard';
 
     // Exibe a sseções na tela [ERROS / ACERTOS / ??]
-<<<<<<< Updated upstream
-  
-    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4>Média p/ Calc</h4><p>${0}</p></div></div>`)
 
-=======
     document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4><abbr title="Tempo médio que o usuário levou para concluir as questões">Média p/ Cal</abbr></h4><p>${`${media}Seg`}</p></div></div>`)
-    footer('2')
->>>>>>> Stashed changes
-}
 
+    footer('2')
+}
 
 // -------- Essa função chama todas as anteriores de forma ordenada ------------
 
 function steps(tabuada){
 
-    //Gera a tabuada
-
     // Começa o cronometro
     starttimer()
+
+    // marca o tempo inicial
+    inicio = select()
 
     //Printa a tabuada no HTML
     printa_tabuada(tabuada);
@@ -245,6 +306,7 @@ function steps(tabuada){
     footer('45')
 
 }
+
 
 // -----------------------------------------------------------------------------
 
