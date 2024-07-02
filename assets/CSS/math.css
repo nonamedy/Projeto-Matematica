@@ -248,6 +248,7 @@ transition: all 0.3s ease;
     flex-direction: row;
     gap: 5px;
     justify-content: space-around;
+    margin-top: 30px;
     
 
 }
@@ -255,6 +256,7 @@ transition: all 0.3s ease;
 .dashboard > div{
 
     width: 12rem;
+    height: fit-content;
     padding: 8px;
     border-radius: 2px;
     font-size: 1.6rem;
@@ -533,4 +535,10 @@ ul#menu li {
     font-size: 1.1rem;
     padding: 1.7rem;
     display:inline;
+}
+
+abbr{
+
+    text-decoration: none;
+
 }
