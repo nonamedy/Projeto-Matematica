@@ -208,7 +208,7 @@ function recebe_resposta(lst){
 
                 // Exibe no HTML aglumas informções.
 
-                containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col">u/result</th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
+                containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col"><abbr title="Resposta do Usuário">u/result</abbr></th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
                 contas_erradas.forEach((conta) => {dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${resposta_correta(conta[0],conta[1])}</td></tr>`})
                
@@ -278,11 +278,9 @@ function dasboard(){
     h2.textContent = 'Dashboard';
 
     // Exibe a sseções na tela [ERROS / ACERTOS / ??]
-    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4>Média p/ Calc</h4><p>${`${media}Seg`}</p></div></div>`)
-
+    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4><abbr title="Tempo médio que o usuário levou para concluir as questões">Média p/ Cal</abbr></h4><p>${`${media}Seg`}</p></div></div>`)
 
 }
-
 
 // -------- Essa função chama todas as anteriores de forma ordenada ------------
 
@@ -290,12 +288,16 @@ function steps(tabuada){
 
     // Começa o cronometro
     starttimer()
+
+    // marca o tempo inicial
     inicio = select()
+
     //Printa a tabuada no HTML
     printa_tabuada(tabuada);
 
     // Contabiliza as contas já comcluidas
     contas_concluidas(tabuada);
+
     // Recebe o resultado e faz os devidos processos
     recebe_resposta(tabuada);
 
