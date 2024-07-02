@@ -37,7 +37,7 @@ header{
     justify-content: space-around;
     align-items:baseline;
     margin-bottom: 50px;
-    padding:1rem;
+    padding:1.3rem;
   
     background-color: rgb(36, 36, 36);
     color: whitesmoke;
@@ -70,8 +70,9 @@ header{
 
 ul li{
 
-    display: inline;
-    padding: 5px;
+    font-size: 1.1rem;
+    padding: 1.7rem;
+    display:inline;
 
 }
 
@@ -103,6 +104,7 @@ main{
 h1{
 
     font-family: tecno;
+    font-size: 1.7rem;
 
 }
 
@@ -115,7 +117,7 @@ h2{
 
 
 h3{
-
+    font-size: 1.2rem;
     background-color:  #213547;
     border: 2px solid rgba(255, 255, 255, 0);
 
@@ -525,4 +527,10 @@ footer{
 
     text-align: center;
 
+}
+
+ul#menu li {
+    font-size: 1.1rem;
+    padding: 1.7rem;
+    display:inline;
 }
