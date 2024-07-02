@@ -1,8 +1,6 @@
 
 export const buttonE1 = document.querySelector('#operação')
 export let operador = '+'
-export let quantity = 0
-
 
 export const tabuadas = {
 
@@ -80,6 +78,7 @@ export const tabuadas = {
 
 }
 
+export let quantity = tabuadas.adição.quantidade
 export let tabuada_estatica = tabuadas.adição.tab_add
 
 export function chose(){

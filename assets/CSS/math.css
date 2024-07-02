@@ -118,7 +118,7 @@ h4{
 
 }
 
-p{
+.hintxt{
 
     margin:6px 6px;
 
@@ -489,4 +489,27 @@ footer{
 }
 
 
+.msg{
 
+    display:flex;
+
+    align-items: left;
+    flex-direction: column;
+    margin: auto;
+
+    width: 350px;
+    gap:7px;
+    padding: 5px;
+
+    text-align: center;
+    line-height: 25px;
+
+    margin-bottom: 30px;
+
+}
+
+.msg > h4 {
+
+    text-align: center;
+
+}
