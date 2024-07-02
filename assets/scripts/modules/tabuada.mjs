@@ -213,9 +213,14 @@ function dasboard(){
     h2.textContent = 'Dashboard';
 
     // Exibe a sseções na tela [ERROS / ACERTOS / ??]
+<<<<<<< Updated upstream
   
     document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4>Média p/ Calc</h4><p>${0}</p></div></div>`)
 
+=======
+    document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4><abbr title="Tempo médio que o usuário levou para concluir as questões">Média p/ Cal</abbr></h4><p>${`${media}Seg`}</p></div></div>`)
+    footer('2')
+>>>>>>> Stashed changes
 }
 
 
@@ -237,10 +242,19 @@ function steps(tabuada){
     // Recebe o resultado e faz os devidos processos
     recebe_resposta(tabuada);
 
+    footer('45')
+
 }
 
 // -----------------------------------------------------------------------------
 
 
+function footer(px){
 
+    const footerE1 = document.querySelector('footer')
+
+    footerE1.style.cssText = `margin-top:${px}vh;`
+
+
+}
 
