@@ -1,5 +1,11 @@
 
 
+@font-face {
+    font-family: "tecno";
+    src: url(../fonts/techno_sphere/TechnoSphere-Regular\ Demo.ttf);
+}
+
+
 *{
 
     margin: 0px;
@@ -17,7 +23,7 @@
 
 body {
 
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: var(--cordefundo);
     color: whitesmoke;
 
@@ -27,6 +33,7 @@ header{
 
     display: flex;
 
+    font-family: Arial, Helvetica, sans-serif;
     justify-content: space-around;
     align-items:baseline;
     margin-bottom: 50px;
@@ -90,6 +97,12 @@ main{
     min-height: 50vw;
     margin-top: 2rem;
     padding: 5px;
+
+}
+
+h1{
+
+    font-family: tecno;
 
 }
 

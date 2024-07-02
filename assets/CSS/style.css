@@ -1,6 +1,11 @@
 
+@font-face {
+    font-family: "tecno";
+    src: url(../fonts/techno_sphere/TechnoSphere-Regular\ Demo.ttf);
+}
+
 *{
-    font-family: Arial, Helvetica, sans-serif;
+    
     margin:0px;
     padding:0px;
     color: white;
@@ -38,6 +43,7 @@ header{
 
     display: flex;
 
+    font-family: Arial, Helvetica, sans-serif;
     justify-content: space-around;
     align-items:baseline;
     margin-bottom: 50px;
@@ -55,7 +61,8 @@ header{
 h1{
 
     font-size: 1.7rem;
-
+    font-family: tecno,Arial, Helvetica, sans-serif;
+  
 }
 
 h2{
@@ -116,6 +123,7 @@ h3{
 
 main{
     
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -236,7 +244,7 @@ a:hover{
 
 footer{
 
-
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 29px;
     text-align: center;
     padding:1.5rem;
