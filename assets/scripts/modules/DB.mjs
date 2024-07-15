@@ -92,6 +92,7 @@ export function acessa_dados(){
         let components = document.createElement('div')
         components.className = 'components'
 
+
         let h3 = document.createElement('h3')
         h3.id= 'comps'
         h3.textContent = 'Resultados anteriores'
@@ -212,4 +213,3 @@ function tag_color(element,operation){
 
 }
 
-acessa_dados()

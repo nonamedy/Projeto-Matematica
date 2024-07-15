@@ -218,6 +218,7 @@ function recebe_resposta(lst){
                 containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col"><abbr title="Resposta do Usuário">u/result</abbr></th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
                 contas_erradas.forEach((conta) => {dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${resposta_correta(conta[0],conta[1])}</td></tr>`})
+                acessa_dados()
                
             }
 
