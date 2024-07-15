@@ -100,6 +100,17 @@
         font-size: 2.4rem;
 
     }
+    .ph-github-logo{
+
+        font-size:1rem;
+
+    }
+
+    .ph-circle{
+
+        font-size: 0.7rem;
+
+    }
 
     .dashboard{
         margin: 25px;
@@ -115,6 +126,12 @@
         position:absolute;
         
 
+    }
+
+    .tab_title{
+
+        font-size: 10px;
+    
     }
 
  

@@ -3,6 +3,8 @@ import { formata_tempo, starttimer,stopTimer,minutes,seconds,milleseconds ,selec
 import { operador,quantity} from "./operação.mjs";
 import { resposta_correta } from "./selectab.mjs";
 import { dicas } from "./hints.mjs";
+import { add_value_db,acessa_dados } from "./DB.mjs";
+
 // container que as contas serão printadas
 const containerE1 = document.querySelector('#contas-container');
 
@@ -18,6 +20,9 @@ const botoes = document.querySelector('.container-botoes');
 // Botão de iniciar
 export const button = document.querySelector('#botão');
 
+// botão com as operações
+let operationButton = document.querySelector('#operação')
+
 // Cronometro
 const cronometroE1 = document.querySelector('.time');
 let soma = 0
@@ -31,6 +36,8 @@ export let contador = 0;
 
 let acerto = 0;
 let erro = 0;
+
+const logs = []
 
 // contas erradas serão armazenadas aqui.
 const contas_erradas = []
@@ -211,6 +218,7 @@ function recebe_resposta(lst){
                 containerE1.innerHTML = `<table><colgroup> <col class="tconta"> <col class="twrong"> <col class="tresposta">   </colgroup><thead><tr><th scope="col">Conta</th><th scope="col"><abbr title="Resposta do Usuário">u/result</abbr></th><th scope="col">resposta</th></tr></thead><tbody class="dados"></tbody></table>`;
                 const dados = document.querySelector('.dados')
                 contas_erradas.forEach((conta) => {dados.innerHTML += `<tr><td>${conta[0]} ${operador} ${conta[1]}</td> <td>${conta[2]}</td> <td>${resposta_correta(conta[0],conta[1])}</td></tr>`})
+                acessa_dados()
                
             }
 
@@ -243,6 +251,15 @@ function recebe_resposta(lst){
 
             // Atribui ao label a 'nova' conta.
             label.textContent = `${lst[contador][0]}${operador}${lst[contador][1]} = `;
+            let obj = {
+                
+                conta:[lst[contador][0],lst[contador][1]],
+                resposta_usuario:user_resposta,
+                resposta_correta:resp
+                
+            }
+            logs.push(obj)
+
             input.value = ''
 
             soma += calcula_diferença(inicio,fim)
@@ -273,6 +290,19 @@ function fcont(){
 
 function dasboard(){
 
+    const obj = {
+
+        acertos:acerto,
+        erros:erro,
+        tempo: formata_tempo(minutes,seconds,milleseconds),
+        operação: operationButton.textContent,
+        data: new Date().toLocaleDateString('PT-BR'),
+        contas:logs
+
+    }
+
+    add_value_db(obj)
+
     // Exibe 'dasboard' na tela
     const h2 = document.querySelector('#h2');
     h2.textContent = 'Dashboard';
@@ -282,6 +312,9 @@ function dasboard(){
     document.querySelector('.cronometro').insertAdjacentHTML('afterend',`<div class="dashboard"><div id="acertos"><h4>Acertos</h4><p>${acerto}</p> </div><div id="erros"><h4>Erros</h4><p>${erro}</p></div><div id="media"><h4><abbr title="Tempo médio que o usuário levou para concluir as questões">Média p/ Cal</abbr></h4><p>${`${media}Seg`}</p></div></div>`)
 
     footer('2')
+
+
+    
 }
 
 // -------- Essa função chama todas as anteriores de forma ordenada ------------
@@ -304,6 +337,8 @@ function steps(tabuada){
     recebe_resposta(tabuada);
 
     footer('45')
+
+   
 
 }
 
