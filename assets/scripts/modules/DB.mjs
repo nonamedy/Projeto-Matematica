@@ -1,7 +1,6 @@
 
-console.log('carregado')
 const father = document.querySelector('main')
-console.log(father)
+
 function create_database(name,version){
 
     return new Promise((resolve,reject) => {
@@ -59,7 +58,6 @@ function transaction(db,ObjectName,mode){
 
 let database = create_database('database',1)
 
-
 export function add_value_db(obj){
 
     console.log('activated')
@@ -82,8 +80,6 @@ export function acessa_dados(){
         let requisition = db.transaction('Registros','readonly').objectStore('Registros')
         let request = requisition.openCursor()
     
-
-
         let section = document.createElement('section')
         section.className = 'history'
         father.insertAdjacentElement('beforeend',section)
@@ -125,12 +121,9 @@ export function acessa_dados(){
         }
 
         request.onerror= (error) => {console.log('deu ruim' + error)}
-    
-    
+
     }
     )
-
-
 
 }
 
